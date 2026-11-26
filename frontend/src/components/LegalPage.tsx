@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { usePageMeta } from "@/lib/seo";
 
-export const OWNER = "Marcello Tucci";
+export const OWNER = "CalcolaPro";
 export const OWNER_EMAIL = "calcolapro15@gmail.com";
-export const LAST_UPDATE = "24 novembre 2026";
+export const LAST_UPDATE = "26 novembre 2026";
 
 interface Props {
   slug: string;
