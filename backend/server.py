@@ -66,6 +66,19 @@ async def get_status_checks():
 from routers.presets import router as presets_router  # noqa: E402
 api_router.include_router(presets_router)
 
+class ContactMessage(BaseModel):
+    name: str
+    email: str
+    subject: str = "Richiesta informazioni"
+    message: str
+
+@api_router.post("/contatti")
+async def save_contact_message(item: ContactMessage):
+    doc = item.model_dump()
+    doc["created_at"] = datetime.now(timezone.utc).isoformat()
+    await db.contact_messages.insert_one(doc)
+    return {"ok": True}
+
 # Include the router in the main app
 app.include_router(api_router)
 
