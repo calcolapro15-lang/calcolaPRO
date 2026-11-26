@@ -11,12 +11,13 @@ export default function Contatti() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const mailSubject = encodeURIComponent(`[CalcolaPro] ${subject}`);
+    const to = ["calcolapro15", "gmail.com"].join("@");
+    const mailSubject = encodeURIComponent("[CalcolaPro] " + subject);
     const mailBody = encodeURIComponent(
-      `Nome: ${name}\nEmail: ${email}\nOggetto: ${subject}\n\nMessaggio:\n${message}`
+      "Nome: " + name + "\nEmail: " + email + "\nOggetto: " + subject + "\n\nMessaggio:\n" + message
     );
 
-    window.location.href = `mailto:calcolapro15@://gmail.com{mailSubject}&body=${mailBody}`;
+    window.location.href = "mailto:" + to + "?subject=" + mailSubject + "&body=" + mailBody;
     setSubmitted(true);
   };
 
