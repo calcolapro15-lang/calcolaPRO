@@ -13,7 +13,7 @@ export default function Contatti() {
     setStatus("sending");
 
     try {
-      const response = await fetch("/api/contatti", {
+      const response = await fetch("https://onrender.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
