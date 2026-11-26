@@ -2,8 +2,23 @@ import React, { useState } from "react";
 import { Mail, Send, CheckCircle2 } from "lucide-react";
 
 export default function Contatti() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("Richiesta informazioni");
+  const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const mailSubject = encodeURIComponent(`[CalcolaPro] ${subject}`);
+    const mailBody = encodeURIComponent(
+      `Nome: ${name}\nEmail: ${email}\nOggetto: ${subject}\n\nMessaggio:\n${message}`
+    );
+
+    window.location.href = `mailto:calcolapro15@://gmail.com{mailSubject}&body=${mailBody}`;
+    setSubmitted(true);
+  };
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
@@ -22,55 +37,26 @@ export default function Contatti() {
           </a>.
         </p>
 
-        <iframe
-          name="hidden_contact_frame"
-          title="Invio modulo"
-          className="hidden"
-        />
-
         {submitted ? (
           <div className="mt-8 rounded-xl border border-emerald-200 bg-emerald-50 p-6 text-emerald-950">
             <div className="flex items-center gap-2.5 font-heading text-lg font-bold text-emerald-900">
               <CheckCircle2 className="size-5 text-emerald-600" />
-              Messaggio inviato con successo!
+              Email pronta per l&apos;invio!
             </div>
             <p className="mt-2 text-sm text-emerald-800">
-              Grazie per averci contattato. Il messaggio è stato recapitato a calcolapro15@gmail.com e ti risponderemo al più presto.
+              Si è aperta la tua applicazione email con il messaggio già compilato per{" "}
+              <strong>calcolapro15@gmail.com</strong>. Premi Invia nella tua casella per completare la spedizione.
             </p>
             <button
               type="button"
               onClick={() => setSubmitted(false)}
               className="mt-4 text-sm font-semibold text-emerald-700 underline hover:text-emerald-900"
             >
-              Invia un altro messaggio
+              Compila un nuovo messaggio
             </button>
           </div>
         ) : (
-          <form
-            action="https://web3forms.com"
-            method="POST"
-            target="hidden_contact_frame"
-            onSubmit={() => {
-              setTimeout(() => setSubmitted(true), 600);
-            }}
-            className="mt-8 space-y-5"
-          >
-            <input
-              type="hidden"
-              name="access_key"
-              value="576c1473-2ecd-4a5f-b192-2463a92d4213"
-            />
-            <input
-              type="hidden"
-              name="subject"
-              value={`[CalcolaPro] ${subject}`}
-            />
-            <input
-              type="hidden"
-              name="from_name"
-              value="CalcolaPro Sito Web"
-            />
-
+          <form onSubmit={handleSubmit} className="mt-8 space-y-5">
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div>
                 <label className="mb-1.5 block text-sm font-semibold text-slate-700">
@@ -78,8 +64,9 @@ export default function Contatti() {
                 </label>
                 <input
                   type="text"
-                  name="name"
                   required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   placeholder="Il tuo nome"
                   className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-600/20"
                 />
@@ -90,8 +77,9 @@ export default function Contatti() {
                 </label>
                 <input
                   type="email"
-                  name="email"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="nome@esempio.it"
                   className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-600/20"
                 />
@@ -103,7 +91,6 @@ export default function Contatti() {
                 Oggetto
               </label>
               <select
-                name="categoria"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
                 className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-600/20"
@@ -120,9 +107,10 @@ export default function Contatti() {
                 Messaggio *
               </label>
               <textarea
-                name="message"
                 required
                 rows={5}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
                 placeholder="Scrivi qui il tuo messaggio..."
                 className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-600/20"
               />
