@@ -4,6 +4,7 @@ import { Calculator, Menu, X } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import CalculatorGuideFAQ from "@/components/CalculatorGuideFAQ";
+import PlatformComparison from "@/components/PlatformComparison";
 
 const NAV = [
   { to: "/", label: "Margini E-commerce", testid: "nav-link-ecommerce-margins" },
@@ -29,6 +30,7 @@ export default function Layout() {
   }, [pathname]);
 
   const showGuideFAQ = CALCULATOR_PATHS.includes(pathname);
+  const showComparison = pathname === "/";
 
   return (
     <div className="flex min-h-svh flex-col bg-[#F8FAFC]">
@@ -81,6 +83,7 @@ export default function Layout() {
 
       <main className="flex-1 pt-16">
         <Outlet />
+        {showComparison && <PlatformComparison />}
         {showGuideFAQ && <CalculatorGuideFAQ pathname={pathname} />}
       </main>
 
