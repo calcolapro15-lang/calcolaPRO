@@ -7,10 +7,12 @@ export default function Contatti() {
   const [subject, setSubject] = useState("Richiesta informazioni");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [debugError, setDebugError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
+    setDebugError("");
 
     try {
       const response = await fetch("https://onrender.com", {
@@ -32,10 +34,13 @@ export default function Contatti() {
         setEmail("");
         setMessage("");
       } else {
+        const text = await response.text();
         setStatus("error");
+        setDebugError(`HTTP ${response.status}: ${text}`);
       }
-    } catch {
+    } catch (err: any) {
       setStatus("error");
+      setDebugError(err?.message || String(err));
     }
   };
 
@@ -136,7 +141,7 @@ export default function Contatti() {
 
             {status === "error" && (
               <p className="text-sm font-medium text-red-600">
-                Il server si sta riavviando: attendi 30 secondi e riprova, oppure scrivi a calcolapro15@gmail.com.
+                Dettaglio errore: {debugError}
               </p>
             )}
 
