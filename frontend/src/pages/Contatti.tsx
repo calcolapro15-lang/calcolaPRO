@@ -7,25 +7,24 @@ export default function Contatti() {
   const [subject, setSubject] = useState("Richiesta informazioni");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
+    setErrorMsg("");
 
     try {
+      const formData = new FormData();
+      formData.append("access_key", "576c1473-2ecd-4a5f-b192-2463a92d4213");
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("subject", `[CalcolaPro] ${subject}`);
+      formData.append("message", message);
+
       const response = await fetch("https://web3forms.com", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: "576c1473-2ecd-4a5f-b192-2463a92d4213",
-          name,
-          email,
-          subject: `[CalcolaPro] ${subject}`,
-          message,
-        }),
+        body: formData,
       });
 
       const data = await response.json();
@@ -37,9 +36,11 @@ export default function Contatti() {
         setMessage("");
       } else {
         setStatus("error");
+        setErrorMsg(data.message || "Errore dal servizio email.");
       }
-    } catch {
+    } catch (err) {
       setStatus("error");
+      setErrorMsg("Errore di connessione al server email.");
     }
   };
 
@@ -140,7 +141,7 @@ export default function Contatti() {
 
             {status === "error" && (
               <p className="text-sm font-medium text-red-600">
-                Si è verificato un problema durante l&apos;invio. Riprova oppure scrivi a calcolapro15@gmail.com.
+                Errore: {errorMsg} (oppure scrivi direttamente a calcolapro15@gmail.com)
               </p>
             )}
 
