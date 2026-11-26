@@ -1,4 +1,3 @@
-tsx
 import React from "react";
 
 interface FAQItem {
@@ -14,15 +13,15 @@ interface GuideData {
 }
 
 const GUIDES: Record<string, GuideData> = {
-  ecommerce: {
+  "/": {
     title: "Guida al calcolo dei margini E-commerce e Reselling",
     intro:
-      "Vendere online su piattaforme come Vinted, eBay, Shopify o Amazon comporta costi nascosti che spesso riducono drasticamente il guadagno reale. Calcolare il margine netto prima di fissare il prezzo ti evita di vendere in perdita.",
+      "Vendere online su piattaforme come Vinted, eBay, Shopify o Amazon comporta costi nascosti che spesso riducono il guadagno reale. Calcolare il margine netto prima di fissare il prezzo ti evita di vendere in perdita.",
     steps: [
       "Inserisci il prezzo finale a cui vendi l'articolo al cliente.",
       "Aggiungi il costo di acquisto del prodotto e le spese di imballaggio (scatole, nastro, etichette).",
       "Seleziona la piattaforma di vendita per applicare automaticamente le commissioni percentuali e fisse.",
-      "Verifica il Guadagno Netto Reale e il ROI (ritorno sull'investimento) nel riquadro verde."
+      "Verifica il Guadagno Netto Reale e il ROI (ritorno sull'investimento) nel riepilogo."
     ],
     faqs: [
       {
@@ -42,7 +41,7 @@ const GUIDES: Record<string, GuideData> = {
       }
     ]
   },
-  piva: {
+  "/preventivi": {
     title: "Guida al calcolo del netto in Regime Forfettario",
     intro:
       "Quando invii un preventivo a un cliente con Partita IVA forfettaria, l'importo fatturato non corrisponde al tuo guadagno reale: devi accantonare la quota per i contributi previdenziali (INPS o Cassa) e l'imposta sostitutiva.",
@@ -70,54 +69,55 @@ const GUIDES: Record<string, GuideData> = {
       }
     ]
   },
-  rendita: {
-    title: "Guida al calcolo della rendita da ETF, BTP e interesse composto",
+  "/affitti-brevi": {
+    title: "Guida al calcolo della rendita netta da Affitti Brevi (Airbnb e Booking)",
     intro:
-      "Simulare la crescita di un capitale nel tempo ti permette di capire l'effetto dell'interesse composto e di pianificare un piano di accumulo (PAC) o una rendita passiva al netto della tassazione italiana.",
+      "Gestire un appartamento o una casa vacanze in locazione breve richiede di considerare non solo il prezzo a notte, ma anche il tasso di occupazione annuo, le commissioni dei portali OTA, i costi di pulizia/utenze e la cedolare secca.",
     steps: [
-      "Inserisci il capitale iniziale che hai già a disposizione.",
-      "Aggiungi l'eventuale versamento mensile ricorrente (PAC) e la durata dell'investimento in anni.",
-      "Imposta il rendimento annuo atteso e l'aliquota fiscale (12,5% per Titoli di Stato/BTP in white list, 26% per ETF azionari e azioni).",
-      "Analizza il capitale finale netto e la rendita mensile stimata."
+      "Inserisci la tariffa media a notte e la percentuale di occupazione stimata (es. 60% = circa 18 notti al mese).",
+      "Aggiungi le commissioni della piattaforma (es. Airbnb o Booking.com) e le spese mensili fisse o per soggiorno (pulizie, biancheria, bollette, Wi-Fi).",
+      "Seleziona l'aliquota della cedolare secca (21% sul primo immobile locato in forma non imprenditoriale, 26% dal secondo immobile).",
+      "Analizza il guadagno netto mensile e annuo e il rendimento percentuale rispetto al valore dell'immobile."
     ],
     faqs: [
       {
-        question: "Che tassazione si applica a BTP ed ETF in Italia?",
+        question: "Come funziona la cedolare secca sugli affitti brevi?",
         answer:
-          "In Italia le plusvalenze e le cedole dei Titoli di Stato italiani ed europei (come i BTP) sono tassate al 12,5%, mentre gli ETF azionari, le azioni e i conti deposito sono tassati al 26%. A questo si aggiunge l'imposta di bollo dello 0,20% annuo sul controvalore."
+          "Per le locazioni brevi (sotto i 30 giorni) gestite da privati al di fuori dell'attività d'impresa, si applica la cedolare secca al 21% sul primo immobile destinato ad affitto breve e al 26% dal secondo al quarto immobile. Oltre i 4 immobili scatta l'obbligo di Partita IVA."
       },
       {
-        question: "Cos'è l'interesse composto?",
+        question: "Su quale importo si calcola la cedolare secca?",
         answer:
-          "L'interesse composto si verifica quando gli interessi o i dividendi generati da un investimento vengono reinvestiti, producendo a loro volta nuovi interessi negli anni successivi e accelerando la crescita del capitale nel lungo periodo."
+          "La cedolare secca si calcola sul corrispettivo lordo indicato nel contratto di locazione (inclusa l'eventuale commissione trattenuta dal portale come Airbnb o Booking e le spese forfettarie addebitate all'ospite)."
       },
       {
-        question: "I risultati della simulazione sono garantiti?",
+        question: "Quali sono i principali costi da considerare in una casa vacanze?",
         answer:
-          "No, il calcolatore fornisce una stima matematica basata su un rendimento medio costante. I mercati finanziari sono soggetti a volatilità e i rendimenti passati non garantiscono rendimenti futuri."
+          "Oltre alle imposte e alle commissioni OTA (solitamente tra il 3% e il 18% a seconda del modello tariffario), occorre calcolare pulizie e lavanderia, utenze (luce, gas, acqua, internet), manutenzione ordinaria, assicurazione e imposta di soggiorno (che però è a carico dell'ospite)."
       }
     ]
   }
 };
 
-export const CalculatorGuideFAQ: React.FC<{ activeTab: string }> = ({ activeTab }) => {
-  const data = GUIDES[activeTab] || GUIDES.ecommerce;
+export default function CalculatorGuideFAQ({ pathname }: { pathname: string }) {
+  const normalizedPath = pathname === "/preventivi" || pathname === "/affitti-brevi" ? pathname : "/";
+  const data = GUIDES[normalizedPath];
 
   return (
-    <section className="mt-12 border-t border-slate-200 pt-10 text-left">
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 md:p-8 shadow-sm space-y-8">
+    <section className="mx-auto max-w-7xl px-4 pb-14 pt-4 sm:px-6 lg:px-8">
+      <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs sm:p-8 space-y-8">
         <div>
-          <span className="inline-block text-xs font-semibold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full mb-3">
+          <span className="inline-block rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-700">
             Guida pratica
           </span>
-          <h2 className="text-2xl font-bold text-slate-900 mb-3">{data.title}</h2>
-          <p className="text-slate-600 leading-relaxed">{data.intro}</p>
+          <h2 className="mt-3 font-heading text-2xl font-bold text-slate-900">{data.title}</h2>
+          <p className="mt-2.5 text-sm leading-relaxed text-slate-600 sm:text-base">{data.intro}</p>
 
-          <div className="mt-5 bg-slate-50 rounded-xl p-5 border border-slate-100">
-            <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wide mb-3">
+          <div className="mt-5 rounded-xl border border-slate-100 bg-slate-50 p-5">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800">
               Come usare questo calcolatore in 4 passi
             </h3>
-            <ol className="list-decimal list-inside space-y-2 text-sm text-slate-700">
+            <ol className="mt-3 list-decimal list-inside space-y-2 text-sm text-slate-700">
               {data.steps.map((step, i) => (
                 <li key={i} className="leading-relaxed">
                   {step}
@@ -128,19 +128,19 @@ export const CalculatorGuideFAQ: React.FC<{ activeTab: string }> = ({ activeTab 
         </div>
 
         <div>
-          <h3 className="text-xl font-bold text-slate-900 mb-4">
+          <h3 className="font-heading text-xl font-bold text-slate-900">
             Domande Frequenti (FAQ)
           </h3>
-          <div className="divide-y divide-slate-200 border border-slate-200 rounded-xl overflow-hidden">
+          <div className="mt-4 divide-y divide-slate-200 overflow-hidden rounded-xl border border-slate-200">
             {data.faqs.map((faq, idx) => (
               <details key={idx} className="group bg-white p-5">
-                <summary className="flex cursor-pointer items-center justify-between font-semibold text-slate-900 list-none">
+                <summary className="flex cursor-pointer list-none items-center justify-between font-semibold text-slate-900">
                   <span>{faq.question}</span>
-                  <span className="ml-4 text-emerald-600 transition-transform group-open:rotate-45 text-xl leading-none">
+                  <span className="ml-4 text-xl leading-none text-emerald-600 transition-transform group-open:rotate-45">
                     +
                   </span>
                 </summary>
-                <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
                   {faq.answer}
                 </p>
               </details>
@@ -150,4 +150,4 @@ export const CalculatorGuideFAQ: React.FC<{ activeTab: string }> = ({ activeTab 
       </div>
     </section>
   );
-};
+}
