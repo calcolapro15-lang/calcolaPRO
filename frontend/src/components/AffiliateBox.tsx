@@ -6,6 +6,7 @@ interface Cta {
   label: string;
   icon: LucideIcon;
   testid: string;
+  href?: string;
 }
 
 interface Props {
@@ -25,11 +26,23 @@ export default function AffiliateBox({ title, subtitle, primary, secondary, test
         <h3 className="mt-3 font-heading text-lg font-bold leading-snug">{title}</h3>
         <p className="mt-1 text-sm text-slate-400">{subtitle}</p>
         <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <a href="#" rel="sponsored nofollow noopener" className="group flex items-center justify-between gap-3 rounded-xl bg-sky-600 px-4 py-3 text-sm font-semibold text-white transition-[background-color,transform] duration-150 hover:bg-sky-700 active:scale-[0.98]" data-testid={primary.testid}>
+          <a
+            href={primary.href || "#"}
+            target={primary.href ? "_blank" : undefined}
+            rel="sponsored nofollow noopener noreferrer"
+            className="group flex items-center justify-between gap-3 rounded-xl bg-sky-600 px-4 py-3 text-sm font-semibold text-white transition-[background-color,transform] duration-150 hover:bg-sky-700 active:scale-[0.98]"
+            data-testid={primary.testid}
+          >
             <span className="flex items-center gap-2"><primary.icon className="size-4 shrink-0" /> {primary.label}</span>
             <ArrowUpRight className="size-4 shrink-0 transition-transform duration-150 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </a>
-          <a href="#" rel="sponsored nofollow noopener" className="group flex items-center justify-between gap-3 rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition-[background-color,transform] duration-150 hover:bg-white/10 active:scale-[0.98]" data-testid={secondary.testid}>
+          <a
+            href={secondary.href || "#"}
+            target={secondary.href ? "_blank" : undefined}
+            rel="sponsored nofollow noopener noreferrer"
+            className="group flex items-center justify-between gap-3 rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition-[background-color,transform] duration-150 hover:bg-white/10 active:scale-[0.98]"
+            data-testid={secondary.testid}
+          >
             <span className="flex items-center gap-2"><secondary.icon className="size-4 shrink-0" /> {secondary.label}</span>
             <ArrowUpRight className="size-4 shrink-0 transition-transform duration-150 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </a>
