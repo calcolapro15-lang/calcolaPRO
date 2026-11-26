@@ -3,12 +3,16 @@ import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { Calculator, Menu, X } from "lucide-react";
 import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
+import CalculatorGuideFAQ from "@/components/CalculatorGuideFAQ";
 
 const NAV = [
   { to: "/", label: "Margini E-commerce", testid: "nav-link-ecommerce-margins" },
   { to: "/preventivi", label: "Preventivi & P.IVA", testid: "nav-link-preventivi-piva" },
   { to: "/affitti-brevi", label: "Rendita Affitti Brevi", testid: "nav-link-affitti-brevi" },
+  { to: "/contatti", label: "Contatti", testid: "nav-link-contatti" },
 ];
+
+const CALCULATOR_PATHS = ["/", "/preventivi", "/affitti-brevi"];
 
 function navClass(isActive: boolean) {
   return cn(
@@ -23,6 +27,8 @@ export default function Layout() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  const showGuideFAQ = CALCULATOR_PATHS.includes(pathname);
 
   return (
     <div className="flex min-h-svh flex-col bg-[#F8FAFC]">
@@ -75,6 +81,7 @@ export default function Layout() {
 
       <main className="flex-1 pt-16">
         <Outlet />
+        {showGuideFAQ && <CalculatorGuideFAQ pathname={pathname} />}
       </main>
 
       <footer className="border-t border-slate-200 bg-white">
@@ -89,6 +96,7 @@ export default function Layout() {
             </p>
           </div>
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-slate-600">
+            <Link to="/contatti" className="transition-colors hover:text-slate-900" data-testid="footer-link-contatti">Contatti</Link>
             <Link to="/privacy-policy" className="transition-colors hover:text-slate-900" data-testid="footer-link-privacy">Privacy Policy</Link>
             <Link to="/cookie-policy" className="transition-colors hover:text-slate-900" data-testid="footer-link-cookie">Cookie Policy</Link>
             <Link to="/disclaimer" className="transition-colors hover:text-slate-900" data-testid="footer-link-disclaimer">Disclaimer & Affiliate Disclosure</Link>
