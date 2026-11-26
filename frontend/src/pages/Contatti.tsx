@@ -20,13 +20,7 @@ export default function Contatti() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "<form action="https://api.web3forms.com/submit" method="POST">
-  <input type="hidden" name="access_key" value="576c1473-2ecd-4a5f-b192-2463a92d4213">
-  <input type="text" name="name" required>
-  <input type="email" name="email" required>
-  <textarea name="message" required></textarea>
-  <button type="submit">Submit</button>
-</form>",
+          access_key: "576c1473-2ecd-4a5f-b192-2463a92d4213",
           name,
           email,
           subject: `[CalcolaPro] ${subject}`,
