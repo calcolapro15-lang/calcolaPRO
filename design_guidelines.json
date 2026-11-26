@@ -1,0 +1,247 @@
+{
+  "project_name": "CalcolaPro",
+  "archetype": "ARCHETYPE 4: SWISS & HIGH-CONTRAST + FINTECH PRECISION",
+  "emotional_tone": "Affidabile, chirurgico, chiaro, moderno, orientato all'efficienza e alla monetizzazione",
+  "context_type": "saas_app / financial_calculator",
+  "typography": {
+    "font_family_heading": "Plus Jakarta Sans, sans-serif",
+    "font_family_body": "DM Sans, sans-serif",
+    "font_family_mono": "JetBrains Mono, monospace",
+    "font_import_line": "@import \"@fontsource-variable/plus-jakarta-sans\";\n@import \"@fontsource-variable/dm-sans\";\n@import \"@fontsource-variable/jetbrains-mono\";",
+    "scale_px": {
+      "display": 52,
+      "h1": 40,
+      "h2": 32,
+      "h3": 24,
+      "body": 16,
+      "caption": 14
+    },
+    "rules": {
+      "headings": "font-heading font-bold tracking-tight text-slate-900",
+      "body": "font-sans text-base leading-relaxed text-slate-600",
+      "numbers_and_currency": "font-mono font-semibold tracking-tight",
+      "overlines": "text-xs uppercase tracking-[0.18em] font-bold text-slate-500"
+    }
+  },
+  "colors": {
+    "surfaces": [
+      {
+        "name": "page",
+        "kind": "solid",
+        "bg": "#F8FAFC",
+        "on_bg": "#0F172A",
+        "on_bg_muted": "#475569"
+      },
+      {
+        "name": "panel",
+        "kind": "solid",
+        "bg": "#FFFFFF",
+        "on_bg": "#0F172A",
+        "on_bg_muted": "#64748B"
+      },
+      {
+        "name": "header_nav",
+        "kind": "glass",
+        "contrast_against": "#FFFFFF",
+        "guarantee": "backdrop-blur-xl bg-white/85 border-b border-slate-200/80 shadow-xs",
+        "on_bg": "#0F172A",
+        "on_bg_muted": "#64748B"
+      },
+      {
+        "name": "result_profit_card",
+        "kind": "solid",
+        "bg": "#064E3B",
+        "on_bg": "#ECFDF5",
+        "on_bg_muted": "#A7F3D0",
+        "roles": {
+          "badge_bg": "#047857",
+          "badge_text": "#FFFFFF",
+          "highlight": "#34D399"
+        }
+      },
+      {
+        "name": "result_loss_card",
+        "kind": "solid",
+        "bg": "#7F1D1D",
+        "on_bg": "#FEF2F2",
+        "on_bg_muted": "#FECACA",
+        "roles": {
+          "badge_bg": "#B91C1C",
+          "badge_text": "#FFFFFF",
+          "highlight": "#F87171"
+        }
+      },
+      {
+        "name": "monetization_card",
+        "kind": "solid",
+        "bg": "#0B1528",
+        "on_bg": "#F8FAFC",
+        "on_bg_muted": "#94A3B8",
+        "roles": {
+          "badge": "#38BDF8",
+          "accent_button_bg": "#0284C7",
+          "accent_button_hover": "#0369A1",
+          "accent_button_text": "#FFFFFF"
+        }
+      },
+      {
+        "name": "pill_badge_positive",
+        "kind": "solid",
+        "bg": "#D1FAE5",
+        "on_bg": "#065F46",
+        "on_bg_muted": "#047857"
+      },
+      {
+        "name": "pill_badge_negative",
+        "kind": "solid",
+        "bg": "#FEE2E2",
+        "on_bg": "#991B1B",
+        "on_bg_muted": "#B91C1C"
+      },
+      {
+        "name": "pill_badge_coming_soon",
+        "kind": "solid",
+        "bg": "#E0F2FE",
+        "on_bg": "#0369A1",
+        "on_bg_muted": "#0284C7"
+      },
+      {
+        "name": "footer_surface",
+        "kind": "solid",
+        "bg": "#0F172A",
+        "on_bg": "#F8FAFC",
+        "on_bg_muted": "#94A3B8"
+      }
+    ],
+    "accent": "#047857",
+    "on_accent": "#FFFFFF",
+    "brand_navy": "#0F172A",
+    "brand_emerald": "#059669",
+    "brand_ruby": "#DC2626",
+    "brand_sky": "#0284C7"
+  },
+  "entry_surfaces": {
+    "/": "Fintech calculator hub — sticky blurred navigation at top, hero statement with platform badges, two-column calculator workbench (inputs left, real-time KPI card + Recharts breakdown right), bottom affiliate callout panel and coming-soon drawer tabs"
+  },
+  "chart_palette": {
+    "product_cost": "#64748B",
+    "platform_fees": "#F59E0B",
+    "shipping_packaging": "#38BDF8",
+    "taxes": "#8B5CF6",
+    "net_profit": "#10B981",
+    "net_loss": "#EF4444"
+  },
+  "platform_presets": [
+    {
+      "id": "vinted",
+      "label": "Vinted",
+      "percentage": 0.0,
+      "fixed": 0.0,
+      "description": "0% commissione venditore (a carico acquirente)"
+    },
+    {
+      "id": "ebay",
+      "label": "eBay",
+      "percentage": 11.0,
+      "fixed": 0.35,
+      "description": "11% + 0,35 € quota fissa per transazione"
+    },
+    {
+      "id": "shopify_stripe",
+      "label": "Shopify / Stripe",
+      "percentage": 2.9,
+      "fixed": 0.3,
+      "description": "2,9% + 0,30 € commissione gateway standard"
+    },
+    {
+      "id": "amazon",
+      "label": "Amazon (FBM/Medio)",
+      "percentage": 15.0,
+      "fixed": 0.0,
+      "description": "15% tariffa di vendita media per categoria"
+    },
+    {
+      "id": "custom",
+      "label": "Personalizzato",
+      "percentage": 5.0,
+      "fixed": 0.0,
+      "description": "Imposta percentuale e quota fissa su misura"
+    }
+  ],
+  "tax_regimes": [
+    {
+      "id": "none",
+      "label": "Vendita occasionale (0%)",
+      "rate": 0.0,
+      "description": "Nessuna imposta sui beni usati personali entro soglia"
+    },
+    {
+      "id": "forfettario",
+      "label": "Forfettario (~15% su utile)",
+      "rate": 15.0,
+      "description": "Aliquota forfettaria media stimata sull'utile netto"
+    },
+    {
+      "id": "ordinario",
+      "label": "Ordinario (~24% IRES/IRPEF)",
+      "rate": 24.0,
+      "description": "Aliquota ordinaria stimata sul margine operativo"
+    }
+  ],
+  "layout_and_grids": {
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "calculator_grid": "grid grid-cols-1 lg:grid-cols-12 gap-8 items-start",
+    "input_column": "lg:col-span-7 space-y-6 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/90 shadow-sm",
+    "results_column": "lg:col-span-5 space-y-6 lg:sticky lg:top-24",
+    "monetization_grid": "grid grid-cols-1 md:grid-cols-2 gap-4 mt-6"
+  },
+  "motion": {
+    "button_press": "transition-transform active:scale-[0.98] duration-150",
+    "card_hover": "transition-all duration-200 hover:shadow-md hover:border-slate-300",
+    "number_transition": "animate-in fade-in zoom-in-95 duration-200",
+    "toast": "Sonner toast configured for confirmation feedback (e.g., 'Riepilogo copiato negli appunti')"
+  },
+  "accessibility": {
+    "min_contrast_ratio": "4.5:1 for all normal text and muted copy against respective backgrounds",
+    "italian_number_format": "Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }) -> 12,50 €",
+    "aria_labels": "Clear labels on all number inputs, platform selector dropdowns, and copy buttons",
+    "keyboard_navigation": "Interactive cards, tabs, and form elements focusable with visible ring: focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none"
+  },
+  "test_attributes": {
+    "nav_logo": "data-testid=\"nav-brand-logo\"",
+    "nav_link_ecommerce": "data-testid=\"nav-link-ecommerce-margins\"",
+    "nav_link_preventivi": "data-testid=\"nav-link-preventivi-piva\"",
+    "nav_link_affitti": "data-testid=\"nav-link-affitti-brevi\"",
+    "input_sale_price": "data-testid=\"input-sale-price\"",
+    "input_purchase_cost": "data-testid=\"input-purchase-cost\"",
+    "input_shipping_cost": "data-testid=\"input-shipping-cost\"",
+    "input_platform_select": "data-testid=\"select-platform-preset\"",
+    "input_custom_percentage": "data-testid=\"input-custom-platform-percentage\"",
+    "input_custom_fixed": "data-testid=\"input-custom-platform-fixed\"",
+    "input_packaging_cost": "data-testid=\"input-packaging-cost\"",
+    "radio_tax_regime": "data-testid=\"radio-tax-regime\"",
+    "card_net_profit": "data-testid=\"card-net-profit-display\"",
+    "value_net_profit": "data-testid=\"value-net-profit-amount\"",
+    "value_margin_percentage": "data-testid=\"value-margin-percentage\"",
+    "value_roi_percentage": "data-testid=\"value-roi-percentage\"",
+    "btn_copy_summary": "data-testid=\"button-copy-summary\"",
+    "btn_reset_calculator": "data-testid=\"button-reset-calculator\"",
+    "breakdown_chart": "data-testid=\"chart-cost-breakdown\"",
+    "affiliate_box": "data-testid=\"box-monetization-affiliate\"",
+    "cta_couriers": "data-testid=\"cta-compare-couriers\"",
+    "cta_bank_account": "data-testid=\"cta-open-business-account\"",
+    "coming_soon_section": "data-testid=\"section-coming-soon\"",
+    "footer_disclaimer": "data-testid=\"footer-disclaimer-text\""
+  },
+  "instructions_to_main_agent": [
+    "Build CalcolaPro in frontend/src/pages/Home.tsx (or separate modular components under frontend/src/components/calculator/).",
+    "Set the font family in frontend/src/index.css using @import '@fontsource-variable/plus-jakarta-sans'; and @import '@fontsource-variable/dm-sans'; and @import '@fontsource-variable/jetbrains-mono';",
+    "Use Recharts (already preinstalled in template) for either a Donut PieChart or BarChart showing the breakdown: Costo Prodotto, Commissioni Piattaforma, Spedizione & Packaging, Tasse, Guadagno Netto.",
+    "Formulas: (1) Total Platform Fee = (Sale Price * Platform% / 100) + Platform Fixed Fee. (2) Gross Margin = Sale Price - Purchase Cost - Shipping Cost - Packaging Cost - Platform Fee. (3) Taxes = Gross Margin > 0 ? (Gross Margin * Tax Rate / 100) : 0. (4) Net Profit = Gross Margin - Taxes. (5) Margin % = (Net Profit / Sale Price) * 100. (6) ROI / Ritorno sull'investimento % = (Net Profit / (Purchase Cost + Shipping Cost + Packaging Cost)) * 100.",
+    "Italian number formatting: Format all inputs and outputs using Italian locale (e.g. 1.250,00 € or 12,50 €). Support typing commas or dots.",
+    "Copy Summary Button: Formats a clean Italian summary (Prezzo di vendita, Costi, Commissioni, Guadagno Netto, Margine %) and copies to navigator.clipboard. Show toast('Riepilogo calcolo copiato negli appunti!').",
+    "Section 2 ('Preventivi & P.IVA') & Section 3 ('Rendita Affitti Brevi') should render as high-polish elegant previews with 'In arrivo a breve' badges, feature highlights (e.g. Scorporo IVA, Calcolo Fattura Elettronica, Cedolare Secca 21% vs 26%, Tassa di Soggiorno), and notification signup form placeholder.",
+    "Affiliate Box: Render prominently under results with 'Risparmia sulle spedizioni e gestisci i tuoi incassi' with two distinct, high-contrast action cards/buttons for courier comparison and 0-fee business banking.",
+    "Verify all data-testid attributes match the specified list for automated regression testing."
+  ]
+}
